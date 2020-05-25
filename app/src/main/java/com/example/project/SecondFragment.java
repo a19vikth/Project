@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +28,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class SecondFragment extends Fragment {
+public class SecondFragment extends Fragment implements adapter.OnItemClickListener {
+    public static final String EXTRA_URL = "imageUrl";
+    public static final String EXTRA_NAME = "NAME";
+    public static final String EXTRA_COMPANY = "company";
+    public static final String EXTRA_LOCATION = "location";
+    public static final String EXTRA_CATEGORY = "category";
+    public static final String EXTRA_SIZE = "size";
+    public static final String EXTRA_COST = "cost";
+
     private RecyclerView mRecyclerView;
     private adapter madapter;
     private ArrayList<planeter> planeterList;
@@ -46,6 +55,22 @@ public class SecondFragment extends Fragment {
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=a19vikth");
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent detailIntent = new Intent(getActivity(),DetailActivity.class);
+        planeter clickedItem = planeterList.get(position);
+
+        detailIntent.putExtra(EXTRA_URL, clickedItem.getimageurl());
+        detailIntent.putExtra(EXTRA_NAME, clickedItem.getMnamn());
+        detailIntent.putExtra(EXTRA_COMPANY, clickedItem.getMcompany());
+        detailIntent.putExtra(EXTRA_LOCATION, clickedItem.getMlocation());
+        detailIntent.putExtra(EXTRA_CATEGORY, clickedItem.getMcategory());
+        detailIntent.putExtra(EXTRA_SIZE, clickedItem.getMsize());
+        detailIntent.putExtra(EXTRA_COST, clickedItem.getMcost());
+
+        startActivity(detailIntent);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -99,12 +124,18 @@ public class SecondFragment extends Fragment {
 
                     String aux = JsonObject.getString("auxdata");
                     String name = JsonObject.getString("name");
+                    String company = JsonObject.getString("company");
+                    int location = JsonObject.getInt("location");
+                    String category = JsonObject.getString("category");
+                    int size = JsonObject.getInt("size");
+                    int cost = JsonObject.getInt("cost");
 
-                    planeterList.add(new planeter(aux, name));
+                    planeterList.add(new planeter(aux, name, company, location, category, size, cost));
 
                 }
                 madapter = new adapter(getActivity(),planeterList);
                 mRecyclerView.setAdapter(madapter);
+                madapter.setOnItemClickListener(SecondFragment.this);
 
 
             } catch (JSONException e) {

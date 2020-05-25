@@ -17,6 +17,15 @@ import java.util.ArrayList;
 public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
     private Context mContext;
     private ArrayList<planeter> mplaneter;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void  setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public adapter(Context context, ArrayList<planeter> exampleList){
         mContext = context;
@@ -37,6 +46,7 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
         String imageUrl = currentItem.getimageurl();
         String namn = currentItem.getMnamn();
 
+
         holder.mtextview.setText(namn);
         Picasso.get().load(imageUrl).fit().centerInside().into(holder.mimageview);
     }
@@ -53,6 +63,18 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
             super(itemView);
             mimageview = itemView.findViewById(R.id.image_view);
             mtextview = itemView.findViewById(R.id.text_namn);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }
