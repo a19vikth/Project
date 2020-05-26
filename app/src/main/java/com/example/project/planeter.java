@@ -39,6 +39,4 @@ public class planeter {
     public int getMsize() {return msize;}
 
     public int getMcost() {return mcost;}
-
-
 }

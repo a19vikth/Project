@@ -46,7 +46,6 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
         String imageUrl = currentItem.getimageurl();
         String namn = currentItem.getMnamn();
 
-
         holder.mtextview.setText(namn);
         Picasso.get().load(imageUrl).fit().centerInside().into(holder.mimageview);
     }

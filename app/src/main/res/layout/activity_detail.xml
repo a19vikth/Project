@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:src="@mipmap/ic_launcher"
-        android:id="@+id/image_view_detail"/>
+        android:id="@+id/image_view_detail"
+        android:background="@android:color/black"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

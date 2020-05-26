@@ -1,12 +1,14 @@
 <resources>
-    <string name="app_name">Project</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Planet appen</string>
+    <string name="action_settings">Om appen</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="next">Nästa</string>
+    <string name="previous">Tillbaka</string>
+    <string name="about_text">Vad är Planet appen?: En app för att på ett enkelt och snabbt sätt lära sig om planeterna i vårat solsystem.</string>
+    <string name="hello_first_fragment">Välkommen till Planet appen!</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="about_text2">Målgrupp: Appen är tänkt att användas som extra undervisningsmatrial för barn i grundskolan.</string>
+    <string name="about_text3">Om appen</string>
 </resources>
